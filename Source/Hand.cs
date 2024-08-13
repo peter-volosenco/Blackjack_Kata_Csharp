@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blackjack_Kata
+namespace Blackjack_Kata.Source
 {
     public class Hand
     {
@@ -15,6 +15,11 @@ namespace Blackjack_Kata
             _cards = new List<Card>();
         }
 
+        public int GetCardsCount()
+        {
+            return _cards.Count; 
+        }
+
         public void AddCard(Card card)
         {
             _cards.Add(card);
@@ -22,13 +27,24 @@ namespace Blackjack_Kata
 
         public int GetTotalValue()
         {
-            int total = _cards.Sum(card => (int)card.Rank);
+            int total = _cards.Sum(card => card.Rank.Value);
             int aceCount = _cards.Count(card => card.Rank == Rank.Ace);
 
             while (total > 21 && aceCount > 0)
             {
                 total -= 10; // Consider Ace as 1 instead of 11
                 aceCount--;
+            }
+
+            return total;
+        }
+
+        public int CalculatePoints()
+        {
+            int total = 0;
+            foreach (Card card in _cards)
+            {
+                total += Convert.ToInt32(card.Rank.Value);
             }
 
             return total;
@@ -47,6 +63,11 @@ namespace Blackjack_Kata
         public override string ToString()
         {
             return string.Join(", ", _cards.Select(card => card.ToString()));
+        }
+
+        public string Display()
+        {
+            return string.Join(", ", _cards.Select(card => card.Display()));
         }
     }
 }

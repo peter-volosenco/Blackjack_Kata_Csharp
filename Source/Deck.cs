@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blackjack_Kata
+namespace Blackjack_Kata.Source
 {
     public class Deck
     {
@@ -13,13 +13,15 @@ namespace Blackjack_Kata
         public Deck()
         {
             _cards = new List<Card>();
-            foreach (Suit suit in Enum.GetValues(typeof(Suit)))
+
+            foreach (var suit in CardDefinitions.Suits)
             {
-                foreach (Rank rank in Enum.GetValues(typeof(Rank)))
+                foreach (var rank in CardDefinitions.Ranks)
                 {
                     _cards.Add(new Card(suit, rank));
                 }
             }
+
             Shuffle();
         }
 
@@ -40,6 +42,22 @@ namespace Blackjack_Kata
             _cards.RemoveAt(0);
             return dealtCard;
         }
+
+        public int Count()
+        {
+            return _cards.Count; 
+        }
+
+        public List<Card> GetCards()
+        {
+            return _cards;
+        }
+
+        public Card GetCard(int index)
+        {
+            return _cards[index];
+        }
+
     }
 
 }

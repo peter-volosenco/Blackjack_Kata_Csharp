@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blackjack_Kata
+namespace Blackjack_Kata.Source
 {
     public class Dealer : Player
     {

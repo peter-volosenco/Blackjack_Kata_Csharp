@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blackjack_Kata
+namespace Blackjack_Kata.Source
 {
     public class Game
     {
@@ -17,6 +17,16 @@ namespace Blackjack_Kata
             _deck = new Deck();
             _player = new Player();
             _dealer = new Dealer();
+        }
+
+        public Player GetPlayer()
+        {
+            return _player;
+        }
+
+        public Dealer GetDealer()
+        {
+            return _dealer;
         }
 
         public void Start()
@@ -75,7 +85,10 @@ namespace Blackjack_Kata
                 DisplayHands();
 
                 Console.WriteLine("Choose an action: (H)it or (S)tand");
-                string action = Console.ReadLine().ToUpper();
+                string action = Console.ReadLine();
+
+                if (action != null)
+                    action = action.ToUpper();
 
                 if (action == "H")
                 {
@@ -108,7 +121,7 @@ namespace Blackjack_Kata
             }
         }
 
-        private void DetermineWinner()
+        public void DetermineWinner()
         {
             if (_player.IsBusted())
             {
@@ -135,7 +148,7 @@ namespace Blackjack_Kata
             }
         }
 
-        private void ResetGame()
+        public void ResetGame()
         {
             _deck = new Deck();
             _player.Hand = new Hand();
